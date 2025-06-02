@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head link rel="stylesheet" href="style.css">
+    <title>API Estacionamento</title>
+</head>
+<body>
+    <h1>Consultar Vagas</h1>
+    <button onclick="buscarVagas()">Ver Vagas</button>
+    <pre id="resultado"></pre>
+
+    <script>
+        async function buscarVagas() {
+            try {
+                const resposta = await fetch('http://cnms-parking-api.net.uztec.com.br/slots');
+                if (!resposta.ok) throw new Error("Erro ao acessar a API");
+                const dados = await resposta.json();
+                document.getElementById('resultado').textContent = JSON.stringify(dados, null, 2);
+            } catch (erro) {
+                document.getElementById('resultado').textContent = 'Erro: ' + erro.message;
+            }
+        }
+    </script>
+    
+
+</body>
+</html>
+
